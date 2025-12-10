@@ -1,0 +1,209 @@
+Marketing Analytics Dashboard
+Streamlit Data Visualization Assignment
+Masters of AI in Business Program
+Business Context
+You are a Data Analyst at NovaMart, a rapidly growing omnichannel retail company operating across India. NovaMart sells electronics, fashion, and home & living products through both online and offline channels. The company has been investing heavily in digital marketing and wants to build a comprehensive analytics dashboard to monitor performance across multiple dimensions.
+The Chief Marketing Officer (CMO) has requested an interactive dashboard that allows the leadership team to explore marketing performance, customer behavior, product sales, and the effectiveness of their lead scoring AI model. Your task is to build this dashboard using Python and Streamlit, demonstrating mastery of various visualization techniques.
+Learning Objectives
+By completing this assignment, you will:
+•	Master the selection and implementation of appropriate chart types for different analytical tasks
+•	Apply principles of visual perception and cognitive load to create effective visualizations
+•	Build interactive dashboards using Streamlit that enable data exploration
+•	Understand how to visualize ML model performance and interpret results
+•	Extract meaningful business insights from marketing data
+Dataset Overview
+You are provided with 11 interconnected CSV files that represent different aspects of NovaMart's marketing operations. Each file has been carefully designed to reveal specific insights when visualized appropriately.
+File Name	Description & Key Fields
+campaign_performance.csv	Daily marketing campaign metrics: impressions, clicks, conversions, spend, revenue, CTR, CPA, ROAS across channels and regions (5,858 records)
+customer_data.csv	Customer demographics and behavior: age, income, LTV, purchases, satisfaction, churn status, engagement metrics (5,000 records)
+product_sales.csv	Hierarchical product sales: Category > Subcategory > Product with sales, units, profit margins by region and quarter (1,440 records)
+lead_scoring_results.csv	ML model predictions: lead features, actual conversion, predicted probability and class for model evaluation (2,000 records)
+feature_importance.csv	Pre-calculated feature importance scores from the lead scoring model with standard deviations
+learning_curve.csv	Training and validation scores at different training set sizes for learning curve visualization
+geographic_data.csv	State-level metrics: lat/lon coordinates, customers, revenue, market penetration, satisfaction (15 states)
+channel_attribution.csv	Attribution model comparison: first-touch, last-touch, linear, time-decay, position-based percentages per channel
+funnel_data.csv	Marketing funnel stages: Awareness through Purchase with visitor counts and conversion rates
+customer_journey.csv	Multi-touchpoint customer journeys with flow counts for Sankey diagram visualization
+correlation_matrix.csv	Pre-computed correlation matrix between 10 key marketing metrics for heatmap visualization
+ 
+Visualization Requirements
+Your dashboard must include the following visualizations. Each visualization should reveal a meaningful business insight. Pay attention to the Expected Insight - this is what your chart should help viewers understand.
+Section 1: Comparison Charts
+1.1 Bar Chart - Channel Performance Comparison
+•	Data Source: campaign_performance.csv
+•	Task: Create a horizontal bar chart showing total revenue by marketing channel
+•	Expected Insight: Google Ads and Email drive the highest revenue, while LinkedIn shows lower volume but higher conversion quality
+•	Interaction: Add a dropdown to switch between Revenue, Conversions, and ROAS metrics
+1.2 Grouped Bar Chart - Regional Performance by Quarter
+•	Data Source: campaign_performance.csv
+•	Task: Compare revenue across regions (North, South, East, West, Central) for each quarter
+•	Expected Insight: West and South regions consistently outperform; Q4 shows significant festive season boost across all regions
+•	Interaction: Allow year selection (2023 vs 2024)
+1.3 Stacked Bar Chart - Campaign Type Contribution
+•	Data Source: campaign_performance.csv
+•	Task: Show how different campaign types (Brand Awareness, Lead Gen, Product Launch, etc.) contribute to total monthly spend
+•	Expected Insight: Lead Generation campaigns consume the largest budget share; Seasonal Sale campaigns spike during Q4
+•	Interaction: Toggle between absolute values and 100% stacked view
+Section 2: Temporal Charts
+2.1 Line Chart - Revenue Trend Over Time
+•	Data Source: campaign_performance.csv
+•	Task: Plot daily/weekly/monthly revenue trend with optional channel breakdown
+•	Expected Insight: Clear upward trend with strong seasonality (Diwali/Christmas peaks); weekend patterns visible in daily view
+•	Interaction: Date range selector, aggregation level toggle (daily/weekly/monthly), channel multi-select
+2.2 Area Chart - Cumulative Conversions
+•	Data Source: campaign_performance.csv
+•	Task: Create a stacked area chart showing cumulative conversions by channel over time
+•	Expected Insight: Visual representation of how each channel's contribution to total conversions grows; Email and Google Ads form the foundation
+•	Interaction: Region filter
+Section 3: Distribution Charts
+3.1 Histogram - Customer Age Distribution
+•	Data Source: customer_data.csv
+•	Task: Display the distribution of customer ages with adjustable bin width
+•	Expected Insight: Customer base skews toward 25-40 age range; different segments show distinct age profiles
+•	Interaction: Bin size slider, segment filter overlay
+3.2 Box Plot - Lifetime Value by Customer Segment
+•	Data Source: customer_data.csv
+•	Task: Compare LTV distribution across Premium, Regular, Budget, New, and Churned segments
+•	Expected Insight: Premium segment shows highest median and widest spread; Churned segment has low LTV with many outliers (high-value lost customers)
+•	Interaction: Option to show individual points overlay
+3.3 Violin Plot - Satisfaction Score Distribution
+•	Data Source: customer_data.csv
+•	Task: Show satisfaction score distribution by NPS category (Promoter, Passive, Detractor)
+•	Expected Insight: Clear separation between groups; Detractors show bimodal distribution suggesting two distinct dissatisfaction drivers
+•	Interaction: Split violin by acquisition channel
+ 
+Section 4: Relationship Charts
+4.1 Scatter Plot - Income vs. Lifetime Value
+•	Data Source: customer_data.csv
+•	Task: Create scatter plot of income vs. LTV, colored by customer segment
+•	Expected Insight: Positive correlation between income and LTV; Premium customers cluster in high-income/high-LTV quadrant; some Budget customers show high LTV (upgrade potential)
+•	Interaction: Add trend line toggle, hover for customer details
+4.2 Bubble Chart - Channel Performance Matrix
+•	Data Source: campaign_performance.csv (aggregated)
+•	Task: Plot CTR (x-axis) vs. Conversion Rate (y-axis), bubble size = Total Spend, color = Channel
+•	Expected Insight: Email has best CTR-CVR combination; LinkedIn shows high CVR but lower CTR (quality over quantity); Large Google Ads bubble in mid-performance zone suggests optimization opportunity
+•	Interaction: Hover to show all metrics, click to drill into channel
+4.3 Heatmap - Correlation Matrix
+•	Data Source: correlation_matrix.csv
+•	Task: Display correlation heatmap between marketing metrics with diverging color scale
+•	Expected Insight: Strong positive correlation between Spend-Impressions-Clicks; Negative correlation between ROAS and Spend suggests diminishing returns; Cart Abandonment negatively correlates with Conversions
+•	Interaction: Annotate with correlation values on hover
+4.4 Calendar Heatmap - Daily Performance
+•	Data Source: campaign_performance.csv
+•	Task: Create a GitHub-style calendar heatmap showing daily revenue intensity
+•	Expected Insight: Visual patterns for weekday vs. weekend performance; festive season (Oct-Nov) shows intense activity; summer months (Jun-Jul) show lower intensity
+•	Interaction: Year toggle, metric selection
+Section 5: Part-to-Whole Charts
+5.1 Donut Chart - Attribution Model Comparison
+•	Data Source: channel_attribution.csv
+•	Task: Show channel contribution under different attribution models (first-touch, last-touch, linear)
+•	Expected Insight: Google Ads gets more credit in first-touch; Email gets more credit in last-touch; Linear provides balanced view
+•	Interaction: Toggle between attribution models, center shows total conversions
+5.2 Treemap - Product Sales Hierarchy
+•	Data Source: product_sales.csv
+•	Task: Display product hierarchy (Category > Subcategory > Product) with size = Sales, color = Profit Margin
+•	Expected Insight: Electronics dominates sales volume; Fashion has highest margins (color intensity); Identify high-volume low-margin products for pricing review
+•	Interaction: Click to drill down into category/subcategory
+5.3 Sunburst Chart - Customer Segmentation Breakdown
+•	Data Source: customer_data.csv
+•	Task: Create hierarchy: Region > City Tier > Customer Segment with size = Customer Count
+•	Expected Insight: Metro cities (Tier 1) have higher Premium segment concentration; Tier 2/3 cities show growth potential with larger Regular/Budget segments
+•	Interaction: Click to zoom into segment
+5.4 Funnel Chart - Conversion Funnel
+•	Data Source: funnel_data.csv
+•	Task: Visualize marketing funnel from Awareness to Purchase
+•	Expected Insight: Biggest drop-off between Awareness and Interest (55% loss); Evaluation to Purchase conversion is healthy (53%); Focus optimization on top-of-funnel
+•	Interaction: Show conversion rates between stages
+ 
+Section 6: Geographic Charts
+6.1 Choropleth Map - State-wise Revenue
+•	Data Source: geographic_data.csv
+•	Task: Create India map with states colored by revenue intensity
+•	Expected Insight: Maharashtra and Karnataka are top performers; Eastern states show lower penetration but growth potential (YoY growth metric)
+•	Interaction: Switch between Revenue, Customers, Market Penetration, YoY Growth metrics
+6.2 Bubble Map - Store Performance
+•	Data Source: geographic_data.csv
+•	Task: Plot bubbles on map where size = Store Count, color = Customer Satisfaction
+•	Expected Insight: Large clusters in metro areas; Some high-store-count regions show lower satisfaction (operational issues); Kerala shows small store count but high satisfaction
+•	Interaction: Hover for detailed state metrics
+Section 7: ML Model Evaluation Charts
+7.1 Confusion Matrix - Lead Scoring Model
+•	Data Source: lead_scoring_results.csv
+•	Task: Create confusion matrix heatmap from actual_converted vs. predicted_class
+•	Expected Insight: Model shows good true positive rate; False positives are acceptable (sales team contacts extra leads); False negatives should be minimized (missed opportunities)
+•	Interaction: Show counts and percentages, threshold slider to see how confusion matrix changes
+7.2 ROC Curve - Model Performance
+•	Data Source: lead_scoring_results.csv
+•	Task: Calculate and plot ROC curve from predicted_probability and actual_converted
+•	Expected Insight: AUC around 0.75-0.80 indicates good model; Curve stays well above diagonal (random classifier); Optimal threshold around 0.4-0.5
+•	Interaction: Mark optimal threshold point, display AUC score
+7.3 Learning Curve - Model Diagnostics
+•	Data Source: learning_curve.csv
+•	Task: Plot training and validation scores vs. training set size with confidence bands
+•	Expected Insight: Curves converging indicates no overfitting; Gap between curves suggests some variance; More data would marginally improve performance
+•	Interaction: Toggle confidence bands
+7.4 Feature Importance - Model Interpretability
+•	Data Source: feature_importance.csv
+•	Task: Create horizontal bar chart of feature importance with error bars
+•	Expected Insight: Webinar attendance and form submissions are strongest predictors; Business should invest more in webinars for lead quality; Email opens alone have low predictive value
+•	Interaction: Sort ascending/descending, show/hide error bars
+ 
+Recommended Dashboard Structure
+Organize your Streamlit app with a sidebar navigation allowing users to explore different analytical perspectives:
+Page 1: Executive Overview
+•	Key KPI cards (Total Revenue, Conversions, ROAS, Customer Count)
+•	Revenue trend line chart
+•	Channel performance bar chart
+Page 2: Campaign Analytics
+•	Temporal charts (line, area)
+•	Comparison charts (bar, grouped bar, stacked bar)
+•	Calendar heatmap
+Page 3: Customer Insights
+•	Distribution charts (histogram, box plot, violin)
+•	Relationship charts (scatter, bubble)
+•	Sunburst segmentation
+Page 4: Product Performance
+•	Treemap of product hierarchy
+•	Category comparison charts
+•	Regional product performance
+Page 5: Geographic Analysis
+•	Choropleth map
+•	Bubble map
+Page 6: Attribution & Funnel
+•	Funnel chart
+•	Donut chart for attribution models
+•	Correlation heatmap
+Page 7: ML Model Evaluation
+•	Confusion matrix
+•	ROC curve
+•	Learning curve
+•	Feature importance
+Technical Requirements
+Required Libraries
+streamlit, pandas, numpy, plotly, altair, matplotlib, seaborn, scikit-learn, folium/pydeck (for maps)
+Code Quality Standards
+•	Modular code with separate functions for each visualization
+•	Proper caching using @st.cache_data for data loading
+•	Responsive layout using st.columns()
+•	Clear variable names and docstrings
+•	Error handling for edge cases
+Deliverables
+1.	Streamlit Application: Complete working dashboard with all 20+ visualizations
+2.	Source Code: Well-organized Python files with comments
+3.	Insights Report: 2-page summary of key business insights discovered through your visualizations
+4.	Presentation: 5-minute video walkthrough of your dashboard highlighting 3 key insights
+Evaluation Criteria
+Criteria	Weight	Description
+Chart Type Appropriateness	25%	Correct chart selection for the data and analytical task
+Visual Design Quality	20%	Color usage, labeling, accessibility, data-ink ratio
+Interactivity & UX	20%	Filters, tooltips, navigation, responsiveness
+Insight Generation	20%	Quality and clarity of business insights derived
+Code Quality	15%	Organization, readability, efficiency, documentation
+
+Bonus Challenges (Optional)
+1.	Sankey Diagram (+5%): Visualize customer journey paths from customer_journey.csv
+2.	Animated Charts (+5%): Add time-based animation to show performance evolution
+3.	Precision-Recall Curve (+3%): Add PR curve alongside ROC for imbalanced class analysis
+4.	Dark Mode (+3%): Implement theme toggle for dark/light mode
+5.	Export Feature (+4%): Allow users to download filtered data and charts
+Good luck! Let data tell the story.
